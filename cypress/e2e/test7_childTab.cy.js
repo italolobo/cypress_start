@@ -1,7 +1,7 @@
-/// <reference types="Cypress" />
+// <reference types="Cypress" />
 
 describe("My Second Test Suite", function () {
-  this.beforeEach(() => {
+  beforeEach(() => {
     cy.visit("https://rahulshettyacademy.com/AutomationPractice/");
   });
 
@@ -16,6 +16,10 @@ describe("My Second Test Suite", function () {
       const url = el.prop("href");
       cy.log(url);
       cy.visit(url);
+
+      cy.origin(url, () => {
+        cy.get("div[class='button float-left'] a[class='main-btn']").should('contain.text', 'Access')
+      });
     });
   });
 
@@ -26,7 +30,7 @@ describe("My Second Test Suite", function () {
 
     cy.origin("https://www.qaclickacademy.com", () => {
       cy.get('#navbarSupportedContent a[href*="about"]').click();
-      cy.get(".page-banner-cont > h2").should("have.text", "About Us");
+      cy.get("div[class='button float-left'] a[class='main-btn']").should('contain.text', 'Access')
 
     });
   });
