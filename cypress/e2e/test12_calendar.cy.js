@@ -1,12 +1,12 @@
 
 
 describe('My First Test', () => {
-    it('Visits the Kitchen Sink', () => {
+    it('calendar', () => {
         cy.visit('https://rahulshettyacademy.com/seleniumPractise/#/offers')
 
         const month = 5
-        const day = 17
-        const year = 1988
+        const day = 10
+        const year = 1990
 
         cy.get('div.react-date-picker__inputGroup').click()
         cy.get('.react-calendar__navigation__label__labelText').click()
@@ -39,7 +39,7 @@ describe('My First Test', () => {
 
         cy.get('button.react-calendar__year-view__months__month').eq(month-1).click()
 
-        cy.get('button.react-calendar__month-view__days__day').contains(day).click()
+        cy.get('button.react-calendar__month-view__days__day').contains('button', day).click()
 
         cy.get('input.react-date-picker__inputGroup__month').should('have.value', month)    
         cy.get('input.react-date-picker__inputGroup__day').should('have.value', day)    
