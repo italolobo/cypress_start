@@ -7,38 +7,36 @@ describe("Test Login", () => {
     beforeEach(function () {  // I have to use beforeEach because I need to load the data before each test, the before does not work in this case
         cy.fixture('example').then((data) => {
             this.data = data;
-        });    
-    }); 
+            //Page
+            this.homePage = new HomePage();
+        });
+    });
 
+    it.only('Valid credentials', function () {
 
-    it('Valid credentials', function () { 
-
-        //Page
-        const homePage = new HomePage();
         //Steps
-        homePage.visit();
-        homePage.fillUsername(this.data.username);
-        homePage.fillPassword(this.data.password);
-        homePage.checkTerms();
-        homePage.submit();
+        this.homePage.visit();
+        this.homePage.fillUsername(this.data.username);
+        this.homePage.fillPassword(this.data.password);
+        this.homePage.checkTerms();
+        const productPage = this.homePage.submit();
         //Assertion
-        homePage.getErrorMessage().should('not.exist');
-
+        productPage.getTitle()
+            .should('be.visible')
+            .and('contain.text', 'ProtoCommerce');
     })
 
-    it('Invalid username', function () { 
+    it('Invalid username', function () {
 
-        //Page
-        const homePage = new HomePage();
         //Steps
-        homePage.visit();
-        homePage.fillUsername('invalid');
-        homePage.fillPassword(this.data.password);
-        homePage.checkTerms();
-        homePage.submit();
+        this.homePage.visit();
+        this.homePage.fillUsername('invalid');
+        this.homePage.fillPassword(this.data.password);
+        this.homePage.checkTerms();
+        this.homePage.submit();
         //Assertion
-        homePage.getErrorMessage().should('be.visible');
-
+        this.homePage.getErrorMessage()
+            .should('be.visible');
     })
 
 

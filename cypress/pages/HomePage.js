@@ -1,37 +1,30 @@
-class HomePage {
+import ProductPage from './ProductPage';
 
-    constructor() {
-        this.usernameField = '#username';
-        this.passwordField = '#password';
-        this.loginButton = 'input#signInBtn';
-        this.termCheckbox = 'input#terms';
-        this.errorMessage = '.alert.alert.alert-danger';
-        this.roleSelect = 'select.form-control';
-        this.optionsRadio = 'div.form-check-inline';
-    }
+class HomePage {   
 
     visit() {
         cy.visit('https://rahulshettyacademy.com/loginpagePractise/#');
     }
 
     fillUsername(username) {
-        cy.get(this.usernameField).type(username);
+        cy.get('#username').type(username);
     }
 
     fillPassword(password) {
-        cy.get(this.passwordField).type(password);
+        cy.get('#password').type(password);
     }
 
     checkTerms() {
-        cy.get(this.termCheckbox).check();
+        cy.get('input#terms').check();
     }
 
     getErrorMessage() {
-        return cy.get(this.errorMessage);
+        return cy.get('.alert.alert.alert-danger');
     }
 
     submit() {
-        cy.get(this.loginButton).click();
+        cy.get('input#signInBtn').click();
+        return new ProductPage();
     }
 
 }
